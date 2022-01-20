@@ -38,18 +38,20 @@ const tarkovAmmoSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    ballistics: [
-        {
-            dmg: Number,
-            armordamage: Number,
-            fragmentationChance: Number,
-            penetrationChance: Number,
-            accuaracy: Number,
-            recoil: Number,
-            initialSpeed: Number
-        }
-    ]
+    ballistics: {
+        
+        damage: Number,
+        armorDamage: Number,
+        fragmentationChance: Number,
+        ricochetChance: Number,
+        penetrationChance: Number,
+        penetrationPower: Number,
+        accuaracy: Number,
+        recoil: Number,
+        initialSpeed: Number
+    }
+    
 
 })
 
-module.exports = mongoose.model("tarkovAmmo", tarkovAmmoSchema)
+module.exports = mongoose.model("tarkovAmmos", tarkovAmmoSchema)

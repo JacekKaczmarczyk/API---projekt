@@ -9,6 +9,7 @@ router.get('/', (req,res) => {
 
 router.post('/', (req,res) => {
     const ammo = new tarkovAmmo({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         shortName: req.body.shortName,
         weight: req.body.weight,
