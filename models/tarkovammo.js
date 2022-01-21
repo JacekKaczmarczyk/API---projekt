@@ -54,4 +54,4 @@ const tarkovAmmoSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("tarkovAmmos", tarkovAmmoSchema)
+module.exports = mongoose.model("tarkovammo", tarkovAmmoSchema)

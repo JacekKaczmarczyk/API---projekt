@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const tarkovAmmo = require('../models/tarkovammo');
 
-router.get('/', (req,res) => {
-    res.send('Homepage');
-});
+
 
 router.post('/', (req,res) => {
     const ammo = new tarkovAmmo({
@@ -20,26 +18,45 @@ router.post('/', (req,res) => {
         ammoType: req.body.ammoType,
         projectileCount: req.body.projectileCount,
         ballistics: req.body.ballistics
-        /*[
-            {
-                dmg: Number,
-                armordamage: Number,
-                fragmentationChance: Number,
-                penetrationChance: Number,
-                accuaracy: Number,
-                recoil: Number,
-                initialSpeed: Number
-            }
-        ]
-        */
     })
     ammo.save()
     .then(data => {
         res.status(200).json(data);
     })
-    .catch(err => {
-        res.json({message: err})
+    .catch(err => res.status(500).json({Error: err}))
+});
+
+router.get("/", (req, res) => {
+    tarkovAmmo.find()
+    .then(result => {
+        res.status(200).json({
+            message: "Ammo list",
+            info: result
+        })
     })
+    .catch(err => res.status(500).json({Error: err}))
+});
+
+router.get("/:ammoID", (req, res, next) => {
+    const id = req.params.ammoID
+    tarkovAmmo.findById(id)
+    .then(result => {
+        res.status(200).json({
+            message: "Ammo " + id,
+            info : result
+        })
+    })
+    .catch(err => res.status(500).json({Error : err}))
+})
+
+router.put("/:ammoID", (req, res) => {
+    const id = req.params.ammoID
+    res.status(200).json({message: "Replaced ammo " + id})
+})
+
+router.delete("/:ammoID", (req, res, next) => {
+    const id = req.params.ammoID
+    res.status(200).json({message: "Deleted ammo " + id})
 })
 
 module.exports = router;
