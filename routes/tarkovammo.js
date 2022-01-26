@@ -49,14 +49,28 @@ router.get("/:ammoID", (req, res, next) => {
     .catch(err => res.status(500).json({Error : err}))
 })
 
-router.put("/:ammoID", (req, res) => {
-    const id = req.params.ammoID
-    res.status(200).json({message: "Replaced ammo " + id})
+router.get("/caliber/:caliber", (req, res, next) => {
+    const caliber = req.params.caliber
+    tarkovAmmo.find({caliber: caliber})
+    .then(result => {
+        res.status(200).json({
+            message: "Ammo " + caliber,
+            info : result
+        })
+    })
+    .catch(err => res.status(500).json({Error : err}))
 })
 
-router.delete("/:ammoID", (req, res, next) => {
-    const id = req.params.ammoID
-    res.status(200).json({message: "Deleted ammo " + id})
+router.put("/:ammoID", (req, res) => {
+    tarkovAmmo.findByIdAndUpdate(req.params.ammoID, req.body).then(tarkovAmmo => {
+        res.status(200).json({message: "Ammo updated " });
+    }).catch(err => {console.log(err);});
+})
+
+router.delete('/:ammoID', (req, res, ) => {
+    tarkovAmmo.findByIdAndRemove(req.params.ammoID).then(tarkovAmmo => {
+        res.status(200).json({message: "Ammo deleted "});
+    }).catch(err => {console.log(err);});
 })
 
 module.exports = router;
