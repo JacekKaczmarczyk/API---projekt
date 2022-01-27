@@ -7,6 +7,6 @@ wyświetlania amunicji po kalibrze,
 usuwania amunicji po id,
 zastępowania amunicji po id,
 usuwania amunicji po id,
-dodawania użytkownika
-logowania
-routy do modyfikacji danych w bazie danych zostały zabezpieczone tokenem dla zalogowanych osób
+dodawania użytkownika,
+logowania.
+Routy do modyfikacji danych w bazie danych zostały zabezpieczone tokenem dla zalogowanych osób
